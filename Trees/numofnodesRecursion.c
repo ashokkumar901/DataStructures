@@ -1,4 +1,4 @@
-//Program to understand the tree traversals of inorder, preorder,and postorder
+//Program to find the number of nodes in a tree using recursion
 #include <stdio.h>
 #include <stdlib.h> 
 
@@ -8,37 +8,12 @@ struct node{
     struct node *left,*right;
 };
 
-//Function to implement inorder traversal
-void inOrder(struct node *t){
-    if(t){
-        if(t->left)
-            inOrder(t->left);
-        printf("%c\n",t->data);
-        if(t->right)
-            inOrder(t->right);
-    }
-}
-
-//Function to implement preorder traversal
-void preOrder(struct node *t){
-    if(t){
-        printf("%c\n",t->data);
-        if(t->left)
-            inOrder(t->left);
-        if(t->right)
-            inOrder(t->right);
-    }
-}
-
-//Function to implement postorder traversal
-void postOrder(struct node *t){
-    if(t){
-        if(t->left)
-            inOrder(t->left);
-        if(t->right)
-            inOrder(t->right);
-        printf("%c\n",t->data);
-    }
+//function to find the number of nodes in a tree
+int numofNodes(struct node *t){
+    if(t)
+        return 1 + numofNodes(t->left) + numofNodes(t->right);
+    else
+        return 0;
 }
 
 int main(){
@@ -83,11 +58,6 @@ int main(){
     sixth -> left = NULL;
     sixth -> right = NULL;
     t = head;
-    // while(t){
-    //     printf("%c\n",t->data);
-    //     t = t -> right;
-    // }
-    // inOrder(t);
-    // preOrder(t);
-    postOrder(t);
+    int nn = numofNodes(t);
+    printf("The number of nodes in the tree: %d",nn);//outputs 7
 }
